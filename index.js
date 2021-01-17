@@ -1,2 +1,3 @@
+const runCommand = require('./todos-cmd');
 
-require('./todos-cmd')
+runCommand(process.argv);
