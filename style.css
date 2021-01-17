@@ -18,33 +18,39 @@ body, html{
 .app-title {
     font-size: 28px;
     padding: 0px;
-    margin: 0px;
+    margin: 0 auto;
     color: #fff;
  }
     .app-headline {
     color: #999;
-    margin-top: 50px;
+    margin: 50px auto;
     font-size: 15px;
     }
     
     main {
-    margin: 100px;
+    margin: 100px 100px 50px 100px;
     }
     .cards{
-        display: block;
+        display: relative;
     }
     .card{
         border-bottom: 1px solid #000000;
         display: flex;
-        justify-content: space-evenly;
+        justify-content: space-between;
         align-items: center;
         
+    }
+    .btn{
+        width: 30%;
     }
     .todo_item{
         display: flex;
         justify-content: space-between;
-       
     }       
+    .todo_description{
+            font-size: 14px;
+            color: rgb(122, 122, 122);
+    }
     form {
         padding: 10px;
         text-align: center;
