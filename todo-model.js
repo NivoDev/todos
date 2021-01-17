@@ -1,1 +1,1 @@
-requeire('./file-db.js')
+require('./file-db')

@@ -1,1 +1,1 @@
-require('./todo-model.js')
+require('./todo-model')

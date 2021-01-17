@@ -1,1 +1,2 @@
-require('./todos-cmd.js')
+
+require('./todos-cmd')
