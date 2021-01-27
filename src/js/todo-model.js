@@ -4,16 +4,14 @@ require('./file-db');
 
 const PATH =  "todos.json";
 
-async function addTodo(todo){
-    const todos = await getData(PATH);
-    todos.push(todo);
-    await setData(PATH , todos);
-    // return getData(PATH)
-    // .then(todos => {
-    //     todos.push(todo)
-    //     return todos;
-    // })
-    // .then(todos => setData(PATH),todos);
+async function addTodo(todo) {
+	const todos = await getData(PATH);
+	const newTodoId = todos[todos.length - 1].id + 1;
+	const newTodo = { ...todo, id: newTodoId };
+	todos.push(newTodo);
+	await setData(PATH, todos);
+
+	return newTodo;
 }
 
 async function removeTodo(todoId){
@@ -22,14 +20,39 @@ async function removeTodo(todoId){
     await setData(PATH , filteredTodos);
 }
 
-function updateTodo(todoId , changes){
-//find
+async function updateTodo(todoId , changes ={}){
+const todos = await getData(PATH);
+const foundTodo = todos.find(todo => todo.id === todoId);
+
+Object.assign(foundTodo,changes)
+
+await setData(PATH , todos)
+
+return foundTodo;
 }
 
-function getTodos(filters = {}){
-//filteer is done
+async function getTodos(filters = {}){
+    const todos = await getData(PATH);
+
+    return todos.filter(todo => {
+        let result = true;
+        if('isDone' in filters){
+            result = result && todo.isDone === filters.isDone;
+        }
+        if('content' in filters){
+            result = result && new RegExp(filters.content,'i').test(todo.content)
+        }
+        if('id' in filters){
+            result = result && todo.id === filters.id;
+        }
+
+        return result;
+    })
+
 }
 module.exports ={
     addTodo,
-    removeTodo
+    removeTodo,
+    updateTodo,
+    getTodos
 }
