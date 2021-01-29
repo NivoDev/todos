@@ -22,7 +22,7 @@ async function printFilteredTodos(filterString){
         filters.isDone === false;
     }
     if(('isDone' in filters) && filterString){
-        filters.content = filterString
+        filters.title = filterString
     }
     const todos = await model.getTodos(filters)
     
@@ -32,8 +32,8 @@ async function deleteTodo(id){
    await model.removeTodo(Number(id)); 
    console.log('item deleted succssesfully')
 }
-async function addTodo(content, extra){
-    const newTodo = await model.addTodo({content, isDone: extra === 'done'});
+async function addTodo(title, extra){
+    const newTodo = await model.addTodo({title, isDone: extra === 'done'});
 
     console.table([newTodo])
 }

@@ -9,8 +9,8 @@ app.get('/api/todos',async(req,res)=>{
     if(req.query.isDone){
         filters.isDone = req.query.isDone === 'true';
     }
-    if(req.query.content){
-        filters.content === req.query.content;
+    if(req.query.title){
+        filters.title === req.query.title;
     }
  
     const todos = await model.getTodos(filters)
@@ -20,6 +20,17 @@ app.delete('/api/todos/:todoId',async(req,res)=>{
     await model.removeTodo(Number(req.params.todoId));
     res.json({message: 'Todo remove succssesfully'});
 })
+
+app.post('/api/todos',async(req,res)=>{
+    await model.addTodo(req.todo);
+    res.json(todo);
+});
+
+app.pus('/api/todos/:todoId',async(req,res)=>{
+    await model.updateTodo(Number(req.params.todoId));
+    res.json({changes})
+});
+
 
 app.listen(3000 , ()=> console.log('app is running'));
 

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="module" href="./src/js/index.js">
     <link rel="stylesheet" href="./src/style.css">
-    <title>Todo - Niv</title>
+    <title>Todo - App Niv</title>
 </head>
 <body>
         <div class="container">
@@ -18,8 +18,8 @@
                     <div class="cards">
                         <div class="card">
                             <input class="todo__state" type="checkbox" />
-                            <p class="todo_title">{Todo title}</p>
-                            <p class="todo_description">{Todo description}</p>
+                            <p class="todo_title">{title}</p>
+                            <p class="todo_description">{description}</p>
                                 <div class="btns">    
                                     <button class="btn" id="update" type="button">✏️</button>
                                     <button class="btn" id="delete" type="button">✖️</button>
@@ -32,12 +32,12 @@
             <section>
                 <form>
                     <h1>Enter your Todo</h1>
-                    <label>Title:
-                        <input id="todo_title" type="text" placeholder="Enter your text">
+                    <label>Title:<br>
+                        <input type="text" id="todo_title" placeholder="Enter your text">
                     </label>
                     <br>
-                    <label>Description:
-                        <textarea id="todo_description" cols="20" rows="5"></textarea>
+                    <label>Description:<br>
+                        <input type="text" id="todo_description" placeholder="Enter todo description"></textarea>
                     </label>
                     <br>
                     <input type="submit" value="Add Task">
