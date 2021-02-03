@@ -3,9 +3,20 @@ const model = require('./todo-model')
 const express = require('express');
 const { query } = require('express');
 const app = express();
+const bodyParser = require('body-parser');
+const jsonParser = bodyParser.json();
+const userModel = require('./models/users')
+const {checkUserHeaders, checkExistUser} = require('./middlewares/auth');
+const {checkTodoPermissions} = require('./middlewares/todos');
+
+//middleware user
+app.use(checkUserHeaders);
+app.use(checkExistUser);
 
 app.get('/api/todos',async(req,res)=>{
-    const filters = {};
+    const filters = {
+        userId: req.userId
+    };
     if(req.query.isDone){
         filters.isDone = req.query.isDone === 'true';
     }
@@ -16,21 +27,23 @@ app.get('/api/todos',async(req,res)=>{
     const todos = await model.getTodos(filters)
     res.json(todos);
 });
-app.delete('/api/todos/:todoId',async(req,res)=>{
-    await model.removeTodo(Number(req.params.todoId));
+
+
+app.delete('/api/todos/:todoId',checkTodoPermissions,async(req,res)=>{
+    await model.removeTodo(req.todo.id);
     res.json({message: 'Todo remove succssesfully'});
 })
 
-app.post('/api/todos',async(req,res)=>{
-    await model.addTodo(req.todo);
-    res.json(todo);
+app.post('/api/todos',jsonParser, async(req,res)=>{
+    const newTodo = await model.addTodo({...req.body, userId: req.user.id});
+    res.json(newTodo);
 });
 
-app.pus('/api/todos/:todoId',async(req,res)=>{
-    await model.updateTodo(Number(req.params.todoId));
-    res.json({changes})
+app.put('/api/todos/:todoId',checkTodoPermissions,jsonParser,async(req,res)=>{
+    const updatedTodo = await model.updateTodo(req.todo.id, {...req.body, userId: req.user.id});
+    res.json(updatedTodo)
 });
 
 
-app.listen(3000 , ()=> console.log('app is running'));
+app.listen(3000 , ()=> console.log('app is running on https://Localhost:3000'));
 

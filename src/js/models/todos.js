@@ -39,20 +39,31 @@ async function getTodos(filters = {}){
         if('isDone' in filters){
             result = result && todo.isDone === filters.isDone;
         }
-        if('content' in filters){
-            result = result && new RegExp(filters.content,'i').test(todo.content)
+        if('title' in filters){
+            result = result && new RegExp(filters.title,'i').test(todo.title)
         }
         if('id' in filters){
             result = result && todo.id === filters.id;
+        }
+        if('userId' in filters){
+            result = result && todo.userId === filters.userId;
         }
 
         return result;
     })
 
 }
+
+async function getTodo(todoId){
+    const todos = await getData(PATH);
+
+    return todos.filter(todo => todo.id !== todoId);
+
+}
 module.exports ={
     addTodo,
     removeTodo,
     updateTodo,
-    getTodos
+    getTodos,
+    getTodo
 }
