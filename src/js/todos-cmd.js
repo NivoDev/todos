@@ -35,11 +35,9 @@ async function deleteTodo(id){
 async function addTodo(title, extra){
     const newTodo = await model.addTodo({title, isDone: extra === 'done'});
 
-    console.table([newTodo])
+    console.table([ newTodo ]);
 }
-async function setTodoAsDone(id){
-    await model.updateTodo(Number(id) , {isDone: true})
-}
-async function setTodoAsUnDone(id){
-        await model.updateTodo(Number(id) , {isDone: true})
+async function setTodoAsDone(id,isDone){
+    const updatedTodo = await model.updateTodo(Number(id) , {isDone});
+    console.table([updatedTodo]);
 }

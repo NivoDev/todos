@@ -2,7 +2,7 @@ const {getTodo} = require('../models/todos');
 
 async function checkTodoPermissions(req,res,next){
     const todo = await getTodo(Number(req.params.todoId));
-    if(todo && todo.userId === req.userId){
+    if(todo && todo.userId === req.user.id){
         req.todo = todo
         next()
     }else{
