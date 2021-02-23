@@ -1,4 +1,4 @@
-const {getTodo} = require('../models/todos');
+const {getTodo} = require('../service/todos');
 
 async function checkTodoPermissions(req,res,next){
     const todo = await getTodo(Number(req.params.todoId));

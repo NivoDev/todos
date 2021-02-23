@@ -1,5 +1,27 @@
 {
+  "name": "niv-todo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/js/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db": "docker-compose --file mongo-compose.yaml up"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NivoDev/todos.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NivoDev/todos/issues"
+  },
+  "homepage": "https://github.com/NivoDev/todos#readme",
   "dependencies": {
-    "body-parser": "^1.19.0"
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "fs": "^0.0.1-security",
+    "mongoose": "^5.11.15"
   }
 }

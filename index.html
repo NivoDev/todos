@@ -15,16 +15,15 @@
             </header>
 
             <main>
-                    <div class="cards">
-                        <div class="card">
-                            <input class="todo__state" type="checkbox" />
+                    <div class="todos">
+                        <div class="todo">
                             <p class="todo_title">{title}</p>
                             <p class="todo_description">{description}</p>
-                                <div class="btns">    
-                                    <button class="btn" id="update" type="button">✏️</button>
-                                    <button class="btn" id="delete" type="button">✖️</button>
-                                    <button class="btn" id="done" type="button">✔️</button>
-                                </div>
+                            <div class="btns">    
+                                <button onclick= "updateTodo()" class="btn" type="button">✏️</button>
+                                <button onclick="removeTodo()" class="btn" type="button">✖️</button>
+                                <button onclick="setTodoAsDone()" class="btn" type="button">✔️</button>
+                            </div>
                         </div>
                       
                 </div>    
@@ -37,10 +36,10 @@
                     </label>
                     <br>
                     <label>Description:<br>
-                        <input type="text" id="todo_description" placeholder="Enter todo description"></textarea>
+                        <input type="text" id="todo_description" placeholder="Enter todo description"></input>
                     </label>
                     <br>
-                    <input type="submit" value="Add Task">
+                    <button type="submit">Add Task</button>
                 </form>  
             </section>
         </div>

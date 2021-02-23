@@ -1,9 +1,9 @@
-const usersModel = require('../models/users');
+const usersModel = require('../service/users');
 
 const checkUserHeaders = (req,res,next) =>{
 
     if(req.headers.user){
-        req.userId = Number(req.headers.user);
+        req.userId = req.headers.user;
         next();
     }else{
         res.status(401).json({message: "Please provide valid user"});
@@ -22,5 +22,5 @@ const checkExistUser =(req,res,next) =>{
 
 module.exports = {
     checkUserHeaders,
-    checkUserHeaders
+    checkExistUser
 }

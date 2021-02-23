@@ -1,4 +1,4 @@
-const model = require('./todo-model');
+const model = require('./models/todos');
 
 module.exports = function runCommand([ _ , __ , action , value = '' , extraValue ]){
     switch(action){
