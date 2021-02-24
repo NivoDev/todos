@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 
 
 function connect(mongoUri){
-    require('./users');
-    require('./todos');
+    require('../service/users');
+    require('../service/todos');
     return mongoose.connect(mongoUri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,

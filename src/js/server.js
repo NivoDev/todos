@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors')
 const morgan = require('morgan');
+
 const todoRoutter = require('./routes/todos')
 const { checkUserHeaders, checkExistUser} = require('./middlewares/auth')
 const {connect} = require('./service');
@@ -22,5 +23,5 @@ app.use(checkExistUser);
 
 app.use(todoRoutter)
     
-router.listen(process.env.PORT || 3000, ()=> console.log('app is running on https://Localhost:3000'));
+app.listen(process.env.PORT || 3000, ()=> console.log('app is running on https://Localhost:3000'));
 

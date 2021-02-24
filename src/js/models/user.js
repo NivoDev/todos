@@ -1,4 +1,4 @@
-const {Schema} = require('mongoose');
+const {Schema, model} = require('mongoose');
 
 const ObjectId = Schema.ObjectId;
 const UserSchema = new Schema({
@@ -11,6 +11,6 @@ const UserSchema = new Schema({
 })
 
 
-const User = mode('User', TodoSchema);
+const User = model('User', UserSchema);
 
 module.exports = User;

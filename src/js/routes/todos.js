@@ -1,12 +1,11 @@
 const { Router } = require('express');
-
 const service = require('../service/todos')
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
-const router = Router();
+const todosRouter = Router();
 const { checkTodoPermissions } = require('../middlewares/todos')
 
-router.get('/api/todos',async(req,res)=>{
+todosRouter.get('/api/todos',async(req,res)=>{
     const filters = {
         user: req.user._id
     };
@@ -25,16 +24,16 @@ router.get('/api/todos',async(req,res)=>{
 });
 
 
-router.delete('/api/todos/:todoId',checkTodoPermissions,async(req,res)=>{
+todosRouter.delete('/api/todos/:todoId',checkTodoPermissions,async(req,res)=>{
     await service.removeTodo(req.todo.id);
     res.json({message: 'Todo remove succssesfully'});
 })
 
-router.post('/api/todos',jsonParser, async(req,res)=>{
+todosRouter.post('/api/todos',jsonParser, async(req,res)=>{
     const newTodo = await service.addTodo({...req.body, user: req.user._id});
     res.json(newTodo);
 });
-router.put('/api/todos/:todoId',checkTodoPermissions,jsonParser,async(req,res)=>{
+todosRouter.put('/api/todos/:todoId',checkTodoPermissions,jsonParser,async(req,res)=>{
     const updatedTodo = await service.updateTodo(req.todo.id, {...req.body, user: req.user._id});
     res.json(updatedTodo)
 });

@@ -11,7 +11,7 @@ const checkUserHeaders = (req,res,next) =>{
 }
 
 
-const checkExistUser =(req,res,next) =>{
+const checkExistUser = async (req,res,next) =>{
     req.user = await userModel.getUser(req.userId)
     if(req.user){
         next();

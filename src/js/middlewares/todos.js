@@ -1,6 +1,6 @@
 const {getTodo} = require('../service/todos');
 
-async function checkTodoPermissions(req,res,next){
+const checkTodoPermissions = async (req,res,next) => {
     const todo = await getTodo(Number(req.params.todoId));
     if(todo && todo.userId === req.user.id){
         req.todo = todo

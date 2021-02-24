@@ -1,4 +1,3 @@
-const { ObjectId } = require('mongoose')
 const User = require('../model/users');
 
 async function getUser(userId){

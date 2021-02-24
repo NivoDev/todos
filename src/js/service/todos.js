@@ -1,3 +1,4 @@
+require('../file-db')
 const { getData, setData } = require('../file-db');
 const Todo = require('../models/todo')
 const TODOS_PATH =  "todos.json";
@@ -40,12 +41,11 @@ async function getTodos(filters = {}){
         query.user = filters.user;
     }
 
-    return Todo.find({query})
+    return Todo.find(query);
 }
 
 async function getTodo(todoId){
     const todos = await getData(TODOS_PATH);
-
     return todos.filter(todo => todo.id !== todoId);
 
 }
