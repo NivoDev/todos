@@ -25,7 +25,7 @@ todosRouter.get('/api/todos',async(req,res)=>{
 
 
 todosRouter.delete('/api/todos/:todoId',checkTodoPermissions,async(req,res)=>{
-    await service.removeTodo(req.todo.id);
+    await req.todo.remove();
     res.json({message: 'Todo remove succssesfully'});
 })
 
@@ -34,9 +34,24 @@ todosRouter.post('/api/todos',jsonParser, async(req,res)=>{
     res.json(newTodo);
 });
 todosRouter.put('/api/todos/:todoId',checkTodoPermissions,jsonParser,async(req,res)=>{
-    const updatedTodo = await service.updateTodo(req.todo.id, {...req.body, user: req.user._id});
-    res.json(updatedTodo)
+    const todo = req.todo;
+    const {title, description , isDone} = req.body;
+    todo.updated = new Date();
+    
+
+    if(typeof isDone === 'boolean'){
+        todo.isDone = isDone
+    }
+    if(title){
+        todo.title = title;
+    }
+    if(description){
+        todo.description = description;
+    }
+    await todo.save()
+    
+    res.json(todo)
 });
 
 
-module.exports = router;
+module.exports = todosRouter;

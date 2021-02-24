@@ -1,7 +1,6 @@
 require('../file-db')
 const { getData, setData } = require('../file-db');
 const Todo = require('../models/todo')
-const TODOS_PATH =  "todos.json";
 
 function addTodo(todo) {
 	const newTodo = new Todo(todo);
@@ -14,18 +13,8 @@ async function removeTodo(todoId){
     await setData(TODOS_PATH , filteredTodos);
 }
 
-async function updateTodo(todoId , changes ={}){
-const todos = await getData(TODOS_PATH);
-const foundTodo = todos.find(todo => todo.id === todoId);
 
-Object.assign(foundTodo,changes)
-
-await setData(TODOS_PATH , todos)
-
-return foundTodo;
-}
-
-async function getTodos(filters = {}){
+function getTodos(filters = {}){
     const query = {};
     if('isDone' in filters){
         query.isDone = filters.isDone;
@@ -44,15 +33,12 @@ async function getTodos(filters = {}){
     return Todo.find(query);
 }
 
-async function getTodo(todoId){
-    const todos = await getData(TODOS_PATH);
-    return todos.filter(todo => todo.id !== todoId);
-
+function getTodo(todoId, userId){
+    return Todo.findOne({_id: todoId, user: userId});
 }
 module.exports ={
     addTodo,
     removeTodo,
-    updateTodo,
     getTodos,
     getTodo
 }
