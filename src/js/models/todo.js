@@ -4,7 +4,7 @@ const ObjectId = Schema.ObjectId;
 const TodoSchema = new Schema({
     title:{ 
         type: String,
-        required: true,
+        required: true
 
     },
     description:{
@@ -17,7 +17,9 @@ const TodoSchema = new Schema({
         },
     user:{
         type: ObjectId,
-        ref: 'user',
+        ref: 'User',
+        required: true,
+        index: true
     },
     created:{
         type: Date,
@@ -26,6 +28,6 @@ const TodoSchema = new Schema({
     updated: Date
 });
 
-const Todo = mode('Todo', TodoSchema);
+const Todo = model('Todo', TodoSchema);
 
 module.exports = Todo;
